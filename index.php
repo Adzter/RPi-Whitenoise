@@ -18,91 +18,106 @@
     <![endif]-->
   </head>
   <body>
+	<?php 
+		//Include the settings file
+		include( 'settings.php' );
+		//Include the message class
+		include( 'inc/message.php' );
+	?>
+	<form id="audioTypeForm">
+		<input id="audioType" value="local" type="hidden"/>
+	</form>
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<div class="container">
+			<p><img id="logo" src="img/logo.png" alt="RPi White Noise Logo"/></p>
+		</div>
+	</div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
+	<div class="container">
+		<!-- Example row of columns -->
+		<div class="row">
+			<div class="col-md-4">
+			<!-- This is where the alert messages are kept !-->
+				<div id="output">
+					<?php 
+						if( empty( $login ) ){
+							$failed = new Message();
+							echo $failed->printMessage( 'Can\'t connect to RPi, check your settings file', 'danger' ); 
+						}
+					?>
+				</div>
+				
+				<h2>Audio output</h2>
+				<p>Use this to select the audio output, by default it's set up to use audio jack, if you switch you'll have to restart the track.</p>
+				<button type="button" class="btn btn-primary" id="hdmi">HDMI</button>
+				<button type="button" class="btn btn-primary" id="audiojack">Audio Jack</button>
+			</div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Audio output</h2>
-		  <p>Use this to select the audio output, by default it's setup to use HDMI, you can switch between the two dynamically.</p>
-          <button type="button" class="btn btn-primary">HDMI</button>
-		  <button type="button" class="btn btn-primary">Audio Jack</button>
-        </div>
-        <div class="col-md-4">
-          <h2>Song Selector</h2>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="btn-group btn-input clearfix">
-						<button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
-							<span data-bind="label">Select One</span>&nbsp;<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<?php
-								$dir = glob('files/*');
-								
-								// Check if there's any files there
-								if ( !empty($dir) ) {
-									//If there is, strip the extension/path and include it
-									foreach (glob("files/*") as $filename) {
-										$fixedName = ucfirst(pathinfo( $filename, PATHINFO_FILENAME ));
-										print("<li><a href=\"#\">" . $fixedName . "</a></li>");
+			<div class="col-md-4">
+				<h2>Song Selector</h2>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="btn-group btn-input clearfix">
+							<select id="dropdown" class="form-control">
+								<?php
+									$dir = glob('files/*');
+									
+									// Check if there's any files there
+									if ( !empty($dir) ) {
+										//If there is, strip the extension/path and include it
+										foreach (glob("files/*") as $filename) {
+											$fixedName = ucfirst(pathinfo( $filename, PATHINFO_FILENAME ));
+											echo("<option value=\"$fixedName\">$fixedName</option>");
+										}
+									} else {
+										//If not provide some instructions
+										echo("<option disabled='disabled'>No files found in the 'files' folder</option>");
 									}
-								} else {
-									//If not provide some instructions
-									print("<li class=\"disabled\"><a href=\"#\">Place audio files into the 'files' folder</a></li>");
-								}
-							?>
-						</ul>
+								?>
+							</select>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="col-md-4">
+				<h2>Controls</h2>
+				<p>
+					<button class="btn btn-default" id="restart" >
+						<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+					</button>
+					<button class="btn btn-default" id="play">
+						<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+					</button>
+					<button class="btn btn-default" id="pause" >
+						<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+					</button>
+				</p>
+				<p>
+					<button class="btn btn-default" id="volumedown">
+						<span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
+					</button>
+					<button class="btn btn-default" id="volumemute">
+						<span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
+					</button>
+					<button class="btn btn-default" id="volumeup">
+						<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+					</button>
+				</p>
+			</div>
 		</div>
-		<div class="col-md-4">
-			<h2>Controls</h2>
-			<p>
-				<button class="btn btn-default">
-					<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-				</button>
-				<button class="btn btn-default">
-					<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-				</button>
-				<button class="btn btn-default">
-					<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
-				</button>
-			</p>
-			<p>
-				<button class="btn btn-default">
-					<span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
-				</button>
-				<button class="btn btn-default">
-					<span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
-				</button>
-				<button class="btn btn-default">
-					<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-				</button>
-			</p>
-		</div>
-      </div>
+	<hr>
 
-      <hr>
-
-      <footer>
-        <p>&copy; Adam Wilson 2014</p>
-      </footer>
+      	<footer>
+       		<p>&copy; Adam Wilson 2015</p>
+      	</footer>
     </div> <!-- /container -->
   
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/ajax-load.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/dropdown.js"></script>
   </body>
