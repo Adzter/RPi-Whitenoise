@@ -50,4 +50,15 @@ $(document).ready(function(){
 			});
         return false;
         });
+        $("#stop").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "inc/controls/stop.php",
+                data: "",
+                success: function(response){
+                    $('#output').html(response);
+                }
+            });
+        return false;
+        });
 });

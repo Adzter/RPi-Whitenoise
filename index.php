@@ -37,17 +37,17 @@
 	<div class="container">
 		<!-- Example row of columns -->
 		<div class="row">
-			<div class="col-md-4">
 			<!-- This is where the alert messages are kept !-->
-				<div id="output">
-					<?php 
-						if( empty( $login ) ){
-							$failed = new Message();
-							echo $failed->printMessage( 'Can\'t connect to RPi, check your settings file', 'danger' ); 
-						}
-					?>
-				</div>
-				
+			<div id="output">
+				<?php 
+					if( empty( $login ) ){
+						$failed = new Message();
+						echo $failed->printMessage( 'Can\'t connect to RPi, check your settings file', 'danger' ); 
+					}
+				?>
+			</div>
+
+			<div class="col-md-4">				
 				<h2>Audio output</h2>
 				<p>Use this to select the audio output, by default it's set up to use audio jack, if you switch you'll have to restart the track.</p>
 				<button type="button" class="btn btn-primary" id="hdmi">HDMI</button>
@@ -68,7 +68,7 @@
 										//If there is, strip the extension/path and include it
 										foreach (glob("files/*") as $filename) {
 											$fixedName = ucfirst(pathinfo( $filename, PATHINFO_FILENAME ));
-											echo("<option value=\"$fixedName\">$fixedName</option>");
+											echo("<option value=\"$filename\">$fixedName</option>");
 										}
 									} else {
 										//If not provide some instructions
@@ -90,8 +90,8 @@
 					<button class="btn btn-default" id="play">
 						<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
 					</button>
-					<button class="btn btn-default" id="pause" >
-						<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+					<button class="btn btn-default" id="stop" >
+						<span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
 					</button>
 				</p>
 				<p>
