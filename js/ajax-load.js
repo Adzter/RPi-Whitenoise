@@ -44,9 +44,6 @@ $(document).ready(function(){
 				type: "POST",
 				url: "inc/controls/play.php",
 				data: postData,
-				success: function(response){
-					$('#output').html(response);
-				}
 			});
         return false;
         });

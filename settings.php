@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
 
 This is your RaspberryPi's login information
 
@@ -16,17 +16,19 @@ don't have ports forwarded on their RPi anyway.
 
 You have been warned.
 
-**/
+*/
 
 $username = 'root';
 $password = 'raspberry';
+$websiteDir = "/var/www/whitenoise/";
 
-include($_SERVER["DOCUMENT_ROOT"] . 'whitenoise/lib/phpseclib/Net/SSH2.php');
-set_include_path( $_SERVER["DOCUMENT_ROOT"] . 'whitenoise/lib/phpseclib/');
+include($_SERVER["DOCUMENT_ROOT"] . '/whitenoise/lib/phpseclib/Net/SSH2.php');
+set_include_path( $_SERVER["DOCUMENT_ROOT"] . '/whitenoise/lib/phpseclib/');
 	
 GLOBAL $ssh;
 $ssh = new Net_SSH2('192.168.1.47');
 if ($ssh->login( $username, $password )) {
 	$login = true;
 }
+
 ?>
