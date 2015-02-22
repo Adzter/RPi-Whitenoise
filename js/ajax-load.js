@@ -28,6 +28,21 @@ $(document).ready(function(){
         return false;
         });
 		
+        //
+        //  STATS
+        //
+        $("#stats").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "inc/stats.php",
+                data: "",
+                success: function(response){
+                    $('#output').html(response);
+                }
+            });
+        return false;
+        });
+
 		//
 		//	VOLUME CONTROLS
         //		
@@ -51,6 +66,28 @@ $(document).ready(function(){
             $.ajax({
                 type: "POST",
                 url: "inc/controls/stop.php",
+                data: "",
+                success: function(response){
+                    $('#output').html(response);
+                }
+            });
+        return false;
+        });
+        $("#volumedown").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "inc/controls/volumedown.php",
+                data: "",
+                success: function(response){
+                    $('#output').html(response);
+                }
+            });
+        return false;
+        });
+        $("#volumeup").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "inc/controls/volumeup.php",
                 data: "",
                 success: function(response){
                     $('#output').html(response);

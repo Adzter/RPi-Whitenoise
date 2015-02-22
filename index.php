@@ -107,6 +107,14 @@
 						<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
 					</button>
 				</p>
+				<p>
+					<button class="btn btn-default" id="repeat">
+						<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+					</button>
+					<button class="btn btn-default" id="stats">
+						<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+					</button>
+				</p>
 			</div>
 		</div>
 	<hr>
