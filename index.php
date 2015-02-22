@@ -11,6 +11,8 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    <!-- File upload styles -->
+    <link href="css/fileinput.min.css" rel="stylesheet">
 	
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,6 +22,28 @@
     <![endif]-->
   </head>
   <body>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="upload" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="modal">Upload audio file</h4>
+	      </div>
+	      <div class="modal-body">
+	        	<form method="post" enctype="multipart/form-data" action="inc/upload.php">
+					<input id="file" type="file" class="file" name="file" data-show-preview="false">
+				</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<?php 
 		//Include the settings file
 		include( 'settings.php' );
@@ -108,15 +132,14 @@
 					</button>
 				</p>
 				<p>
-					<button class="btn btn-default" id="repeat">
-						<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-					</button>
 					<button class="btn btn-default" id="stats">
 						<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
 					</button>
+					<button class="btn btn-default" id="upload" data-toggle="modal" data-target="#upload">
+						<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+					</button>
 				</p>
 			</div>
-		</div>
 	<hr>
 
       	<footer>
@@ -130,5 +153,6 @@
 	<script src="js/ajax-load.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/dropdown.js"></script>
+    <script src="js/fileinput.min.js"></script>
   </body>
 </html>
